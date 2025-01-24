@@ -5,10 +5,10 @@ import {
   FormLabel,
   FormMessage,
 } from "@/components/ui/form";
-import { Input } from "@/components/ui/input";
 import { UseFormReturn } from "react-hook-form";
+import { Textarea } from "../ui/textarea";
 
-export default function ActivityInput({
+export default function DescriptionInput({
   form,
 }: {
   form: UseFormReturn<
@@ -26,12 +26,12 @@ export default function ActivityInput({
   return (
     <FormField
       control={form.control}
-      name="name"
+      name="description"
       render={({ field }) => (
         <FormItem>
-          <FormLabel>Name of activity</FormLabel>
+          <FormLabel>Description (optional)</FormLabel>
           <FormControl>
-            <Input {...field} />
+            <Textarea {...field} />
           </FormControl>
           <FormMessage />
         </FormItem>

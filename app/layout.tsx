@@ -33,7 +33,7 @@ export default function RootLayout({
     <ClerkProvider>
       <html lang="en">
         <body
-          className={`${roboto.variable} ${geistSans.variable} ${geistMono.variable} min-h-screen bg-zinc-900 antialiased`}
+          className={`${roboto.variable} ${geistSans.variable} ${geistMono.variable} min-h-screen w-full bg-zinc-900 antialiased`}
         >
           {children}
         </body>

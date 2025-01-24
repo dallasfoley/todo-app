@@ -5,7 +5,6 @@ import {
   FormControl,
   FormLabel,
   FormMessage,
-  FormDescription,
 } from "../ui/form";
 import { Popover, PopoverContent, PopoverTrigger } from "../ui/popover";
 import { Button } from "../ui/button";
@@ -19,8 +18,11 @@ export default function DatePickerInput({
 }: {
   form: UseFormReturn<
     {
-      activity: string;
+      name: string;
+      description?: string;
       date: Date;
+      time: string;
+      completed: boolean;
     },
     unknown,
     undefined
@@ -31,8 +33,8 @@ export default function DatePickerInput({
       control={form.control}
       name="date"
       render={({ field }) => (
-        <FormItem>
-          <FormLabel className="m-4">Date</FormLabel>
+        <FormItem className="flex flex-col">
+          <FormLabel>Date</FormLabel>
           <Popover>
             <PopoverTrigger asChild>
               <FormControl>
@@ -64,12 +66,9 @@ export default function DatePickerInput({
               />
             </PopoverContent>
           </Popover>
-          <FormDescription className="text-center">
-            Meow meow meow
-          </FormDescription>
           <FormMessage />
         </FormItem>
       )}
-    ></FormField>
+    />
   );
 }

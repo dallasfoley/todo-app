@@ -1,14 +1,15 @@
+import type { UseFormReturn } from "react-hook-form";
 import {
-  FormControl,
   FormField,
   FormItem,
+  FormControl,
   FormLabel,
   FormMessage,
-} from "@/components/ui/form";
-import { Input } from "@/components/ui/input";
-import { UseFormReturn } from "react-hook-form";
+  FormDescription,
+} from "../ui/form";
+import { Input } from "../ui/input";
 
-export default function ActivityInput({
+export default function TimePickerInput({
   form,
 }: {
   form: UseFormReturn<
@@ -26,13 +27,16 @@ export default function ActivityInput({
   return (
     <FormField
       control={form.control}
-      name="name"
+      name="time"
       render={({ field }) => (
         <FormItem>
-          <FormLabel>Name of activity</FormLabel>
+          <FormLabel>Time</FormLabel>
           <FormControl>
-            <Input {...field} />
+            <div className="flex justify-center items-center space-x-2">
+              <Input type={"time"} {...form.register("time")} {...field} />
+            </div>
           </FormControl>
+          <FormDescription>(Click the clock)</FormDescription>
           <FormMessage />
         </FormItem>
       )}
