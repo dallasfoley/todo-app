@@ -22,8 +22,10 @@ import { Textarea } from "../ui/textarea";
 
 export default function UpdateTodoForm({
   activity,
+  onUpdate,
 }: {
   activity: ActivityType;
+  onUpdate: (updatedActivity: ActivityType) => void;
 }) {
   const [open, setOpen] = useState(false);
 
@@ -35,13 +37,20 @@ export default function UpdateTodoForm({
       description: activity.description,
       date: activity.date,
       time: activity.time,
+      completed: activity.completed,
+      userId: activity.userId,
     },
   });
 
   const handleSubmit = async (values: z.infer<typeof ActivitySchema>) => {
-    await updateTodo(values);
-    setOpen(false);
-    // You might want to add some state update or refetch logic here
+    const updatedActivity = await updateTodo(values);
+    if (updatedActivity) {
+      onUpdate(updatedActivity);
+      setOpen(false);
+    } else {
+      // Handle error case
+      console.error("Failed to update todo");
+    }
   };
 
   return (
@@ -54,7 +63,7 @@ export default function UpdateTodoForm({
           <DialogHeader>
             <DialogTitle>Edit todo activity</DialogTitle>
             <DialogDescription>
-              Make changes to your todo activity here. Click save when youre
+              Make changes to your todo activity here. Click save when you are
               done.
             </DialogDescription>
           </DialogHeader>

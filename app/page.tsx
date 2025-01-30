@@ -16,21 +16,21 @@ export default async function Home() {
 
   return (
     <div className="min-h-screen flex justify-center items-center">
-      <Card>
+      <Card className="m-4">
         <CardHeader>
           <CardTitle>Sign-In</CardTitle>
           <CardDescription>
-            SIgn-in or sign-up to get started with your To-Do list!
+            Sign-in or sign-up to get started with your To-Do list!
           </CardDescription>
         </CardHeader>
-        <CardContent className="flex justify-around items-center">
-          <Button asChild>
+        <CardContent className="flex flex-col justify-around items-center">
+          <Button className="w-full my-3" asChild>
             <SignInButton />
           </Button>
-          <Button variant={"secondary"} asChild>
+          <Button className="w-full my-3" variant={"secondary"} asChild>
             <SignUpButton />
           </Button>
-          <Button variant={"destructive"} asChild>
+          <Button className="w-full my-3" variant={"destructive"} asChild>
             <SignOutButton />
           </Button>
         </CardContent>

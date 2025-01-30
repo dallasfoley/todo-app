@@ -9,8 +9,8 @@ import {
 } from "@/components/ui/card";
 import { ActivityTable, UserTable } from "@/drizzle/schema";
 import { db } from "@/lib/db";
-import { ActivityType } from "@/schema/ActivitySchema";
-import { UserType } from "@/schema/UserSchema";
+import type { ActivityType } from "@/schema/ActivitySchema";
+import type { UserType } from "@/schema/UserSchema";
 import { createUser } from "@/server/actions/createUser";
 import { auth } from "@clerk/nextjs/server";
 import { eq } from "drizzle-orm";
@@ -71,7 +71,7 @@ export default async function TodoPage() {
         <CardContent className="flex flex-col items-center">
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
             {activities.map((activity, id) => (
-              <ActivityCard activity={activity} key={id} />
+              <ActivityCard initialActivity={activity} key={id} />
             ))}
           </div>
           <Button className="mt-8 w-full sm:w-auto mx-auto" asChild>

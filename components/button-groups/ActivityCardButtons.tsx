@@ -7,15 +7,16 @@ import UpdateTodoForm from "../forms/updateTodoForm";
 import { Switch } from "../ui/switch";
 import { Label } from "../ui/label";
 import { toggleCompleted } from "@/server/actions/completed";
-import { useTransition, useState } from "react";
+import { useTransition } from "react";
 
 export default function ActivityCardButtons({
   activity,
+  onUpdate,
 }: {
   activity: ActivityType;
+  onUpdate: (updatedActivity: ActivityType) => void;
 }) {
   const [isPending, startTransition] = useTransition();
-  const [isCompleted, setIsCompleted] = useState(activity.completed);
 
   const handleDelete = async () => {
     await deleteTodo(activity);
@@ -23,30 +24,27 @@ export default function ActivityCardButtons({
 
   const handleToggleCompleted = () => {
     startTransition(async () => {
-      setIsCompleted(!isCompleted);
       const updatedActivity = await toggleCompleted(activity);
       if (updatedActivity) {
-        setIsCompleted(updatedActivity.completed);
-      } else {
-        setIsCompleted(isCompleted);
+        onUpdate(updatedActivity);
       }
     });
   };
 
   return (
-    <div className="flex justify-between items-center mt-4">
-      <UpdateTodoForm activity={activity} />
+    <div className="flex justify-between items-center m-2 md:m-4">
+      <UpdateTodoForm activity={activity} onUpdate={onUpdate} />
       <Button
         onClick={handleDelete}
         variant="destructive"
-        className="ml-4 bg-red-500 hover:bg-red-600"
+        className="ml-1 md:ml-4 bg-red-500 hover:bg-red-600"
       >
         Delete
       </Button>
-      <div className="flex flex-col items-center ml-4">
+      <div className="flex flex-col items-center ml-1 md:ml-4">
         <Label className="mb-2">Completed</Label>
         <Switch
-          checked={isCompleted}
+          checked={activity.completed}
           onCheckedChange={handleToggleCompleted}
           disabled={isPending}
           className="bg-gray-200"
