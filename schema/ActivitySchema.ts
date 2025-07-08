@@ -12,7 +12,7 @@ export const ActivitySchema = z.object({
       message: "Date must be before the year 2100",
     }),
   time: z.string().min(5, "Time is required").max(5, "Time is required"),
-  description: z.string().optional().nullable(),
+  description: z.string().optional(),
   userId: z.string().optional(),
   completed: z.boolean().default(false),
 });

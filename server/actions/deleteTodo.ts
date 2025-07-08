@@ -12,7 +12,9 @@ export async function deleteTodo(activity: ActivityType) {
   const { userId } = await auth();
   if (!success || userId === null) return undefined;
 
-  await db.delete(ActivityTable).where(eq(ActivityTable.id, data.id));
+  if (data.id) {
+    await db.delete(ActivityTable).where(eq(ActivityTable.id, data.id));
+  }
 
   revalidatePath("/todo");
 }

@@ -26,7 +26,10 @@ export default function ActivityCardButtons({
     startTransition(async () => {
       const updatedActivity = await toggleCompleted(activity);
       if (updatedActivity) {
-        onUpdate(updatedActivity);
+        onUpdate({
+          ...updatedActivity,
+          description: updatedActivity.description ?? undefined,
+        });
       }
     });
   };
